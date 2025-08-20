@@ -1,10 +1,525 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lenore Live</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-tabs li {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-tabs li:hover,
+        .nav-tabs li.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: 100vh;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 3rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 Q250,50 500,100 T1000,100 L1000,200 L0,200 Z" fill="%23ff6b6b" opacity="0.1"/></svg>');
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 107, 107, 0.8); }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Content Sections */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .song-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .song-title {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-3px);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .band-photo {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Animation for content loading */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Lenore Live</h1>
-    <p>Coming soon...</p>
+    <header>
+        <nav>
+            <div class="logo">LENORE LIVE</div>
+            <ul class="nav-tabs">
+                <li class="tab-btn active" data-tab="home">Home</li>
+                <li class="tab-btn" data-tab="recent-songs">Recent Songs</li>
+                <li class="tab-btn" data-tab="all-songs">All Songs</li>
+                <li class="tab-btn" data-tab="shop">Shop</li>
+                <li class="tab-btn" data-tab="socials">Socials</li>
+                <li class="tab-btn" data-tab="about">About Us</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active fade-in">
+            <div class="hero">
+                <h1>LENORE LIVE</h1>
+                <p>Experience the Sound That Moves You</p>
+                <a href="#" class="cta-button" onclick="showTab('recent-songs')">Listen Now</a>
+            </div>
+            
+            <div style="padding: 3rem 2rem; text-align: center;">
+                <h2 style="margin-bottom: 2rem;">Latest News</h2>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; max-width: 800px; margin: 0 auto;">
+                    <h3 style="color: #ff6b6b; margin-bottom: 1rem;">New Album Coming Soon!</h3>
+                    <p>We're excited to announce our upcoming album will be releasing this fall. Stay tuned for more updates and exclusive previews.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Songs Tab -->
+        <div id="recent-songs" class="tab-content">
+            <h2 class="section-title">Recent Songs</h2>
+            <div class="songs-grid">
+                <div class="song-card">
+                    <h3 class="song-title">Midnight Echoes</h3>
+                    <p>Our latest single featuring haunting melodies and powerful vocals.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">▶ Play</a>
+                    </div>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Electric Dreams</h3>
+                    <p>An electrifying track that blends rock with electronic elements.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">▶ Play</a>
+                    </div>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Neon Nights</h3>
+                    <p>A vibrant anthem perfect for late-night drives and city adventures.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">▶ Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Songs Tab -->
+        <div id="all-songs" class="tab-content">
+            <h2 class="section-title">Complete Discography</h2>
+            <div class="songs-grid">
+                <div class="song-card">
+                    <h3 class="song-title">Midnight Echoes</h3>
+                    <p><strong>Album:</strong> Latest Singles | <strong>Year:</strong> 2024</p>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Electric Dreams</h3>
+                    <p><strong>Album:</strong> Latest Singles | <strong>Year:</strong> 2024</p>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Neon Nights</h3>
+                    <p><strong>Album:</strong> Latest Singles | <strong>Year:</strong> 2024</p>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Shadows Fall</h3>
+                    <p><strong>Album:</strong> First Light | <strong>Year:</strong> 2023</p>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">Rising Sun</h3>
+                    <p><strong>Album:</strong> First Light | <strong>Year:</strong> 2023</p>
+                </div>
+                <div class="song-card">
+                    <h3 class="song-title">City Lights</h3>
+                    <p><strong>Album:</strong> First Light | <strong>Year:</strong> 2023</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Tab -->
+        <div id="shop" class="tab-content">
+            <h2 class="section-title">Official Merchandise</h2>
+            <div class="shop-grid">
+                <div class="product-card">
+                    <div class="product-image">👕</div>
+                    <h3>Band T-Shirt</h3>
+                    <p>Official Lenore Live tour shirt</p>
+                    <p style="color: #ff6b6b; font-weight: bold; margin: 1rem 0;">$25.99</p>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Buy Now</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <h3>Limited Edition Vinyl</h3>
+                    <p>First Light album on vinyl</p>
+                    <p style="color: #ff6b6b; font-weight: bold; margin: 1rem 0;">$34.99</p>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Buy Now</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🧢</div>
+                    <h3>Snapback Hat</h3>
+                    <p>Embroidered logo cap</p>
+                    <p style="color: #ff6b6b; font-weight: bold; margin: 1rem 0;">$19.99</p>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Buy Now</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <h3>Phone Case</h3>
+                    <p>Protect your phone in style</p>
+                    <p style="color: #ff6b6b; font-weight: bold; margin: 1rem 0;">$15.99</p>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Buy Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Socials Tab -->
+        <div id="socials" class="tab-content">
+            <h2 class="section-title">Connect With Us</h2>
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Follow us on social media for the latest updates, behind-the-scenes content, and exclusive releases!</p>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">🎵</span>
+                    <span>Spotify</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">📸</span>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">🐦</span>
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">📘</span>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">🎥</span>
+                    <span>YouTube</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span style="font-size: 1.5rem;">🎶</span>
+                    <span>Apple Music</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- About Us Tab -->
+        <div id="about" class="tab-content">
+            <h2 class="section-title">About Lenore Live</h2>
+            <div class="about-content">
+                <div class="band-photo">🎸</div>
+                <p>Lenore Live emerged from the vibrant music scene with a unique sound that blends electronic elements with rock sensibilities. Formed in 2022, we've been dedicated to creating music that resonates with the soul and moves the body.</p>
+                
+                <p style="margin-top: 2rem;">Our journey began in a small garage, fueled by passion and late-night jam sessions. Today, we're proud to share our music with fans around the world, always staying true to our roots while pushing creative boundaries.</p>
+                
+                <p style="margin-top: 2rem;">With influences ranging from classic rock to modern electronic music, Lenore Live creates an atmosphere that's both nostalgic and forward-thinking. Every performance is an experience, every song tells a story.</p>
+                
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                    <h3 style="color: #ff6b6b; margin-bottom: 1rem;">Contact Us</h3>
+                    <p>📧 contact@lenorelive.com</p>
+                    <p>📱 Booking: booking@lenorelive.com</p>
+                    <p>🏠 Based in: Your City, State</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab content
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+                selectedTab.classList.add('fade-in');
+            }
+
+            // Add active class to selected tab button
+            const selectedButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
+        }
+
+        // Add click event listeners to tab buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    showTab(tabName);
+                });
+            });
+
+            // Smooth scrolling for mobile
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Add some interactive effects
+        document.addEventListener('mousemove', function(e) {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                hero.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+            }
+        });
+    </script>
 </body>
 </html>
