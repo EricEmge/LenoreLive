@@ -267,12 +267,80 @@
             transform: translateY(-3px);
         }
 
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        /* Instagram Feed Styles */
+        .instagram-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .instagram-post {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .post-header {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2rem;
-            line-height: 1.8;
+        }
+
+        .profile-info h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 300px;
+        }
+
+        .post-content {
+            padding: 1rem;
+        }
+
+        .post-content p {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .post-time {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .band-photo {
@@ -454,35 +522,84 @@
 
         <!-- Socials Tab -->
         <div id="socials" class="tab-content">
-            <h2 class="section-title">Connect With Us</h2>
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Follow us on social media for the latest updates, behind-the-scenes content, and exclusive releases!</p>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">🎵</span>
-                    <span>Spotify</span>
-                </a>
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">📸</span>
-                    <span>Instagram</span>
-                </a>
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">🐦</span>
-                    <span>Twitter</span>
-                </a>
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">📘</span>
-                    <span>Facebook</span>
-                </a>
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">🎥</span>
-                    <span>YouTube</span>
-                </a>
-                <a href="#" class="social-link">
-                    <span style="font-size: 1.5rem;">🎶</span>
-                    <span>Apple Music</span>
-                </a>
+            <h2 class="section-title">Follow Us</h2>
+            
+            <!-- Instagram-style Feed -->
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #ff6b6b; font-size: 2rem;">Latest from Instagram</h3>
+                <div class="instagram-feed">
+                    <!-- Instagram Post 1 -->
+                    <a href="https://www.instagram.com/lenore.baltimore/" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="instagram-post">
+                            <div class="post-header">
+                                <div class="profile-info">
+                                    <div class="profile-pic">🎸</div>
+                                    <div>
+                                        <h4>lenore.baltimore</h4>
+                                        <p>Baltimore, Maryland</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-image">
+                                <div style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                    📷 Latest Post
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p><strong>lenore.baltimore</strong> Studio sessions for our upcoming album! 🎵✨ #LenoreLive #NewMusic #Studio</p>
+                                <span class="post-time">2 hours ago</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Instagram Post 2 -->
+                    <a href="https://www.instagram.com/lenore.baltimore/" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="instagram-post">
+                            <div class="post-header">
+                                <div class="profile-info">
+                                    <div class="profile-pic">🎸</div>
+                                    <div>
+                                        <h4>lenore.baltimore</h4>
+                                        <p>Baltimore, Maryland</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-image">
+                                <div style="background: linear-gradient(135deg, #4ecdc4, #ff6b6b); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                    📷 Behind the Scenes
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p><strong>lenore.baltimore</strong> Behind the scenes of our latest music video shoot! 🎬🔥 #BTS #MusicVideo #LenoreLive</p>
+                                <span class="post-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Instagram Post 3 -->
+                    <a href="https://www.instagram.com/lenore.baltimore/" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="instagram-post">
+                            <div class="post-header">
+                                <div class="profile-info">
+                                    <div class="profile-pic">🎸</div>
+                                    <div>
+                                        <h4>lenore.baltimore</h4>
+                                        <p>Baltimore, Maryland</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-image">
+                                <div style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                    📷 Live Performance
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p><strong>lenore.baltimore</strong> What an incredible night! Thank you to everyone who came out 🙌 #LiveMusic #Baltimore #Concert</p>
+                                <span class="post-time">3 days ago</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
