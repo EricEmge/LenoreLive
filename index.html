@@ -74,19 +74,45 @@
             justify-content: center;
             padding: 2rem;
             background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .banner-container {
+            position: relative;
+            max-width: 60%;
+            width: 60%;
         }
 
         .banner-image {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
             transition: all 0.3s ease;
+            display: block;
         }
 
         .banner-image:hover {
             transform: scale(1.02);
             box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            white-space: nowrap;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
         /* Main Content */
@@ -289,6 +315,16 @@
             .banner-section {
                 padding: 1rem;
             }
+
+            .banner-container {
+                max-width: 95%;
+                width: 95%;
+            }
+
+            .banner-text {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.5rem;
+            }
         }
 
         /* Animation for content loading */
@@ -319,18 +355,15 @@
 
     <!-- Banner Section -->
     <div class="banner-section">
-        <img src="banner.png" alt="Lenore Live Banner" class="banner-image">
+        <div class="banner-container">
+            <img src="banner.png" alt="Lenore Live Banner" class="banner-image">
+            <div class="banner-text">Is this peak? No, this is Lenore</div>
+        </div>
     </div>
 
     <main>
         <!-- Home Tab -->
-        <div id="home" class="tab-content active fade-in">
-            <div class="hero">
-                <h1>LENORE LIVE</h1>
-                <p>Is this peak? No, this is Lenore</p>
-                <a href="#" class="cta-button" onclick="showTab('recent-songs')">Listen Now</a>
-            </div>
-            
+        <div id="home" class="tab-content active fade-in">            
             <div style="padding: 3rem 2rem; text-align: center;">
                 <h2 style="margin-bottom: 2rem;">Latest News</h2>
                 <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; max-width: 800px; margin: 0 auto;">
