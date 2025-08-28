@@ -66,9 +66,32 @@
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
+        /* Banner Section */
+        .banner-section {
+            margin-top: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .banner-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .banner-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
         /* Main Content */
         main {
-            margin-top: 80px;
+            margin-top: 0; /* Remove margin since banner handles spacing */
             min-height: 100vh;
         }
 
@@ -262,6 +285,10 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+
+            .banner-section {
+                padding: 1rem;
+            }
         }
 
         /* Animation for content loading */
@@ -289,6 +316,11 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Banner Section -->
+    <div class="banner-section">
+        <img src="banner.png" alt="Lenore Live Banner" class="banner-image">
+    </div>
 
     <main>
         <!-- Home Tab -->
@@ -523,4 +555,3 @@
     </script>
 </body>
 </html>
-
