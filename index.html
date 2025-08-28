@@ -21,10 +21,7 @@
             <div style="max-width: 540px; margin: 0 auto;">
                 <h3 style="text-align: center; margin-bottom: 2rem; color: #ff6b6b; font-size: 2rem;">Latest from Instagram</h3>
                 
-                <!-- Volume Control -->
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <button id="volumeToggle" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">🔊 Mute All Videos</button>
-                </div>
+
                 
                 <div class="instagram-feed-vertical">
                     <!-- Post 1 -->
@@ -519,16 +516,6 @@
             max-width: 540px !important;
         }
 
-        /* Volume Control */
-        #volumeToggle {
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        #volumeToggle:hover {
-            transform: translateY(-2px);
-        }
-
         .band-photo {
             width: 300px;
             height: 300px;
@@ -871,37 +858,6 @@
                 const x = e.clientX / window.innerWidth;
                 const y = e.clientY / window.innerHeight;
                 hero.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
-            }
-        });
-
-        // Volume Control for Instagram videos
-        let videosMuted = false;
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const volumeToggle = document.getElementById('volumeToggle');
-            
-            if (volumeToggle) {
-                volumeToggle.addEventListener('click', function() {
-                    videosMuted = !videosMuted;
-                    
-                    // Find all Instagram iframes and send mute message
-                    const instagramIframes = document.querySelectorAll('iframe[src*="instagram.com"]');
-                    
-                    instagramIframes.forEach(iframe => {
-                        try {
-                            iframe.contentWindow.postMessage(
-                                videosMuted ? 'mute' : 'unmute',
-                                'https://www.instagram.com'
-                            );
-                        } catch (e) {
-                            // Cross-origin restrictions prevent direct access
-                            console.log('Cross-origin access restricted');
-                        }
-                    });
-                    
-                    // Update button text
-                    volumeToggle.innerHTML = videosMuted ? '🔇 Unmute All Videos' : '🔊 Mute All Videos';
-                });
             }
         });
 
