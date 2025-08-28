@@ -589,6 +589,14 @@
         </nav>
     </header>
 
+    <!-- Banner Section -->
+    <div class="banner-section">
+        <div class="banner-container">
+            <img src="banner.png" alt="Lenore Live Banner" class="banner-image">
+            <div class="banner-text">Is this peak? No, this is Lenore</div>
+        </div>
+    </div>
+
     <main>
         <!-- Home Tab -->
         <div id="home" class="tab-content active fade-in">            
@@ -667,7 +675,7 @@
             <div class="banner-section">
                 <div class="banner-container">
                     <img src="banner.png" alt="Lenore Live Banner" class="banner-image">
-                    <div class="banner-text">Is this peak? No, this is Lenore</div>
+                    <div class="banner-text" style="font-size: 0.9rem;">Is this peak? No, this is Lenore</div>
                 </div>
             </div>
         </div>
@@ -803,6 +811,12 @@
             if (selectedButton) {
                 selectedButton.classList.add('active');
             }
+
+            // Scroll to top of page when switching tabs
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         // Add click event listeners to tab buttons
